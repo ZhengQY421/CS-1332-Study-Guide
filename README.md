@@ -71,18 +71,248 @@
 2. PostOrder - visit descendant before node. Left-Right-Node
 3. LevelOrder - visit each node on each level in left to right fashion
 
-###. Binary Trees: 
+### Binary Trees: 
 - Has the following properties:
   1. Each node has at most two children (Left & Right).
   2. Children of a node are an ordered pair. 
 - Order pair explained: 
-  1.	The tree on the left can be represented as: (A(B(D()())(E(H()())(I()()))) (C(F()())(G()())))
+  1.	The tree A can be represented as: (A(B(D()())(E(H()())(I()()))) (C(F()())(G()())))
+      ![Order](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/Pictur2e.png?raw=true)
   2.	An empty tree is (). 
-  3.	Each non-empty tree/substree is: (value left right) 
+  3.	Each non-empty tree/substree is: (value left right)
+-	Arithmetic Expression Tree:
+    1. Internal nodes: operators 
+    2. External nodes: operands 
+    3. InOrder Traversal (LRootR)
+    4. Example: (2 × (a - 1) + (3 × b))
+    ![A](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/Picture1.png?raw=true)
 
+- Notations
+  - n = number of nodes
+  - e = number of external nodes
+  - i = number of internal nodes
+  
+- Properties
+  - e = i+1
+  - e = i+1		
+  - e < 2h				
+  - h < (n-1)/2
+  - n = 2e-1		
+  - h > log2
+  - h < i			
+  - h > log2 (n + 1) - 1
+  
+- Shapes:
+  1.	Complete - all levels, except the last, are full, and the leaves are filled left to right. 
+  2.	Full - every node, except the leaves, has two children.
+  3.	Balanced - the height of each node's left and right subtrees can only differ by 1. 
 
+## VII. Binary Search Tree (BST)
+- Left child < Node < Right Child
+- InOrder traversal traverses tree in ascending order!
+- Performance:
+  - Spaced used is O(n)
+  - Add, search, and remove take O(logn) in best case and O(n) in worst case. 
+- Operations: 
+  1. Searching:
+     1. Check node data
+        - If greater than toSearch, go left
+        - If less than toSearch, go right
+        - If equal, data found 
+     2. Repeat until found or reaches a leaf, which means not found. 
+  2. Adding:
+     1. Same as search
+     2.	Repeat until found or if reaches a leaf, add as a child of the leaf. 
+  3. Removing:
+     1.	If has no children, simply remove it
+     2. If one child, the child replaces the node to be removed 
+     3. If two children, either the predecessor or the successor replaces the node to be removed.
+        -	Predecessor - the largest node in the left (< current) subtree
+        -	Successor - the smallest node in the right (> current) subtree. 
+## VIII. AVL Trees
+- Designed to resolve issues of BST having average of O(log n) for operations. 
+- All AVL trees are balanced BSTs, but not BSTs are AVL trees. 
+- Searching operation remains the same.
+- Adding & Removing
+  - After a node is added/removed, the heights and balance factor of the added/removed node are updated, and if necessary, rotations are done. Implemented recursively. 
+  1. Balance factor (bf) - Calculated by subtracting the height of the left subtree by the height of the right subtree. 
+     1. 0 = Perfect balance.
+     2.	-1/1 = considered balance but slightly heavier on right/left side. No rotations can be done to make tree balanced. 
+     3.	Other values mean that subtree is unbalanced and at least one rotation needs to be done.
+  2. Rotation Types:
+     1. Left Rotation: A node with a bf of -2, and its right child has a bf of 0 or -1. 
+     ![LR](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/PictureLR.png?raw=true)
+     2.	Right Rotation: A node with a bf of 2, and left child has a bf of 0 or 1. 
+     ![RR](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/PictureRR.png?raw=true)
+     3.	Left-Right Rotation: a node with a bf of 2, and left child has a bf of -1. 
+     ![LRR](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/LRR.png?raw=true)
+     4.	Right-Left Rotation: A node with a bf of -2, and right child has a bf of 1.
+     ![RLR](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/RLR.png?raw=true)
+- Performance: 
+  1. Amoretized and worst case are all O(logn).
+  
+## IX. B-Trees (2-4 Trees)
+- Similar to BST & AVL in that smaller items are on the left while larger items on the right. 
+- Each node can have multiple items. 
+- **Order** of a B-tree is how many items and possible children each node has. 
+  - 2-4 trees have an order of 4
+### 2-4 Trees
+- Each node can have 3 items and up to 4 children. 
+- Data items in each node are sorted in ascending order. 
+- Children sorting order:
+  - First child < First item
+  - First item < Second child < Second item
+  - Second item < Third Child < Third item 
+  - Third item < Fourth Child
+- Example:
+  ![24Ex](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/Screen%20Shot%202018-03-06%20at%2000.18.07.png)
+- Properties:
+  - Depth of all leaf nodes are the same
+  - If there are n data items in a node, there are either 0 or n+1 children
+  - Always balanced. 
+- Performance: 
+  - Search, Add, Remove are worst case O(log n). 
+- Operations:
+  1. Searching
+     1. Starting from root, compare first data with toSearch
+        - toSearch < Data: Go to nth child, where n is the position of data compared to in node (ie. 1st, 2nd)
+        - toSearch = Data: Found
+        - toSearch > Data: Go to next data in node
+        - Go to last child if toSearch is greater than all.
+     2. Repeat until found or go off the tree (data doesn't exist in tree). 
+  2. Adding
+     - Always added as a leaf node
+     - Follow same steps as search until data is located or not found.
+        - If not found, add data as a leaf node. 
+        - If found, implement what is defined by the data structure writer. 
+     - Overflow
+        - After a data is added to a leaf node, the node may have more than 3 items. 
+        - To solve this, the 2nd or 3rd item (middle item) is promoted to parent node (creates one if none), and current node is split into two nodes. 
+          - Smaller items become promoted item's left child.
+          - Larger items become promoted item's right child.
+  3. Removing
+     1. Follow same steps as search until data is located or not found. 
+     2. Once found, remove the data
+     3. Then depending on the circumstances: 
+        1. Nothing if current node has no child and has at least one item. 
+        2. If the current node is empty and has child nodes, then move the predecessor/successor into the node. If predecessor/successor is now empty, continue fixing depending on circumstances:
+           1. If any of the empty node's sibling have more than one data, then rotate that data to fill the empty node (similar to AVL).
+           2. If all of the empty node's siblings have only one data, then bring down a reasonable data item from parent and merge with left/riight sibling. Repeat one the two options if this results in an empty/invalid parent node. 
+     - [Operation Examples](docs/B-Trees%20Examples.pdf)
+## X. Heaps
+## XI Priority Queues
+## XII. Maps
+-	A collection of key-value entries. Each key maps to a value. 
+-	Maps uses integer keys as indices in the range of [0,N-1] where N is the capacity of the Map.
+### Hash Map
+-	Hash Map is a data structure that is similar to a map, but hash code of the key is used to determine its key index. 
+-	Hash Map performance in ideal case is O(1), and in worst case is O(n). 
+-	Hash Codes can often exceed the range of the HashMap, so calculations need to be performed to reduce the hash code value to an acceptable index in the HashMap. 
+  - Hash Code % array.length = valid index. 
+- HashMaps uses load factor to determine when the hash map backing array should be resized (new size is usually 2n+1)
+  - load factor = (number of key-value pairs)/(array.length)
+  - When resizing, each index of each key-value pair needs to be recalculated. 
+- A collision occurs when the hash code calculations of two key-value pairs yield the same value.
+  - Also, two different objects may have the same hash code as indicated by the hash code contract. This means two different objects types will have to occupy the same space. 
+- **Collision Handling #1** - External Chaining
+  1. Essentially a linked list is implemented at each index.
+  2. Collided key-value pair is added into the linked list. 
+  3. When searching, first determine the key index, and then search the linked list for the key. 
+  4. When removing, search the key and remove the key-valued pair from the linked list.
+- **Collision Handling #2** - Linear Probing :(
+  1. If there is a collision, then index i+1 is checked to see if empty. If not i+2 is checked, then i+3, and so on and so forth (go to the start of the array if reached the end). Inserts at the empty slot. 
+  2. When searching, determine the key index, and continue check the next index if the key is not found at the current index. 
+  3. Stop when the key is found, the entire array is traversed, or an index has NULL. 
+  4. When removing, search the key and set that index to NULL. 
+      - This would break the search if the key was moved due to collision. To solve this, set a "deleted" marker that indicates something was once stored. However, this also means that adding becomes more complicated because the key to add may be a collided key may already exist elsewhere in the array. To solve this, if came across an index marked "deleted," save the index. Add to the saved index only if the key is not found in the hash map.
+- **Collision Handling #3** - Quadratic Probing
+  1. Same as linear probing but instead of checking i, i+1, i+2, i+3, you instead check i, i+12, i+22, i+32….
+  2. Collisions are more spaced out and other key-value pairs may not be shifted too much from their ideal index. 
+  3. However, not all empty slots are checked and a key-value pair may not be added in. In such case, the backing array will need to be resized when you have probed n = array.length times. 
+- **Collision Handling #4** - Double Hashing
+  1. Uses a secondary hash function and places in the first available cell in the series beginning from the index calculated by the second hash function. 
+  2. Secondary hash function cannot have zero values. 
+  3. Common secondary hash function: *q-k mod q* where q is the hash code. 
+## XIII. Comparable & Comparator
+### Comparable
+- a native Java interface that uses compareTo() to allow two objects to be compared. 
+  1. Contains only the compareTo(Object o) method
+     1. Needs to be implemented. Define the way to compare the objects of the class implementing Comparable Interface. 
+     2. One object will call compareTo() on another object. 
+### Comparator
+- a native Java interface that uses compare() to compare two objects. 
+  1. Provides a reference for the Collections.sort (Collections e, Comparator c) method. 
+  2. Write own Comparator class so unique comparator objects can be made. 
+     1. Define compare(Object a, Object b) method in the class.
+     2.	Compare will then take in two object parameters and compare them. 
+### Example
+```Java
+ public class HDTV implements Comparable <HDTV> {
+    private int size; 
+    private String brand;
+       
+    public HDTV(int size, String brand) {
+        this.size = size; 
+        this.brand = brand;
+    }
 
+    public int getSize() {
+        return size; 
+    }
 
+    public String getBrand(){
+        return brand;
+    }
 
+    //...//
 
+    public int compareTo(HDTV tv) {
 
+        if (this.getSize() > tv.getSize)
+            return 1;
+        else if (this.getSize() < tv.getSize)
+            return -1;
+        else
+            return 0; 
+
+    }
+
+public class SizeComparator implements Compartor<HDTV> { 
+
+    public int compare(HDTV tv1, HDTV tv2) {
+        int tv1Size = tv1.getSize(); 
+        int tv2Size = tv2.getSize();
+
+        if (tv1Size > tv2Size)
+            return 1; 
+        else if (tv1Size < tv2Size)
+            return -1;
+        else 
+            return 0      
+    }
+  
+}
+
+public class Main {
+
+    public static void main (String [] args) {
+
+        HDTV tv1 = new HDTV(55, "Samsung");
+        HDTV tv2 = new HDRV(60, "Sony");
+        HDTV tv3 = new HDRV(42, "Panasonic");
+
+        ArrayList<HDTV> a = new ArrayList<> ();
+        a.add(tv1);
+        a.add(tv2);
+        a.add(tv3);
+
+        Collections.sort(a,new SizeComparator());
+        for (HDTV tv:a) {
+            System.out.println(tv.getBrand()); 
+        }
+    }
+}      
+```
+## XIV. Misc. 
+-	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. 
+-	Amortized means **average** case, **NOT** worst case. 
