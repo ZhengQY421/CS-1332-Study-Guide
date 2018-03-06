@@ -150,7 +150,6 @@
      ![RLR](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/RLR.png?raw=true)
 - Performance: 
   1. Amoretized and worst case are all O(logn).
-  
 ## IX. B-Trees (2-4 Trees)
 - Similar to BST & AVL in that smaller items are on the left while larger items on the right. 
 - Each node can have multiple items. 
@@ -200,8 +199,46 @@
            2. If all of the empty node's siblings have only one data, then bring down a reasonable data item from parent and merge with left/riight sibling. Repeat one the two options if this results in an empty/invalid parent node. 
      - [Operation Examples](docs/B-Trees%20Examples.pdf)
 ## X. Heaps
-## XI Priority Queues
-## XII. Maps
+- Heaps are used when there is a need to keep a set of items in ascending/descending order but want to avoid O(n) worst case operation performance as that of a traditional list. 
+- Commonly represented as a binary tree and called a maxheap/minheap, where the root is the largest/smallest item. Can also be represented as an array. 
+### Properties
+1. **Order Property** - Parent node is always larger than children. No relationship between children. 
+2. **Shape Property** - A heap is always complete, which means each level of the tree is always filled except for the last level, which must be filled left to right without gaps. 
+3. Only root may be accessed, which means heaps *cannot* be searched through. 
+
+### Array Implementation:
+- Root is always at index 1 (0 makes math more challenging). 
+- Given an index i
+  - left child would be at 2i
+  - right child wouldbe at 2i+1
+- Parent of an index i would be at i/2
+- Operations:
+  1. Adding:
+     1. Add the new item to the next open slot in the heap
+     2. Compare the item to parent, and swap parent and child if order property is broken (heapify, usually recursive). 
+     3. Repeat until reached root or there is no need for a swap. 
+  2. Removing: 
+     - Can only remove from root. 
+     1. Remove from root 
+     2. Move item in heap's last slot to the root. 
+     3. Compare and swap the item with the smaller/larger child depending on if it's a minheap/maxheap. 
+     4. Repeat until there is no need for swap or you reach the bottom of the heap. 
+- Performance: 
+  - Adding in amoretized and worst cases are both O(logn). Best case is O(1).
+  - Removing is O(logn).
+### BuildHeap 
+- Algorithm used to covnert an array of numbers into a heap. 
+- Assuming there is a variable called size for the array:
+  ```
+    Iterate index from size/2 to 1:
+        heapify(index)
+  ```
+- [Example](docs/BuildHeapExample.pdf)
+### Priority Queue
+- A data structure that, depending on implementation, return the items in ascending/descending order. 
+- Used for printer jobs, CPU schedulers, etc. 
+- Efficiently implemented using a heap. 
+## XI. Maps
 -	A collection of key-value entries. Each key maps to a value. 
 -	Maps uses integer keys as indices in the range of [0,N-1] where N is the capacity of the Map.
 ### Hash Map
@@ -232,7 +269,45 @@
 - **Collision Handling #4** - Double Hashing
   1. Uses a secondary hash function and places in the first available cell in the series beginning from the index calculated by the second hash function. 
   2. Secondary hash function cannot have zero values. 
-  3. Common secondary hash function: *q-k mod q* where q is the hash code. 
+  3. Common secondary hash function: *q-k mod q* where q is the hash code.
+## XII. Skip List
+- Linkedlist searching is O(n), but this can be improved by having randomly chosen items in another list and have the act as a "marker." This reduces search time by searching fewer items. 
+- A skip list is similar to a linked list with items in ascending order, but a skip list has multiple levels. Each level has ideally half of the items of the level before it, so first level would have all items, second level has half of the items, etc. 
+- A random coin flipper is used to determine if an item gets promoted and how many times it is promoted when adding. 
+  - Heads: Item is promoted to the next level. 
+  - TailsL Item is not promoted and no more flips are done. 
+- Skip List Node (Quad-Node):
+  - A reference to the item stored.
+  - References to previous and next nodes in that level. 
+  - References to node directly connected in the previous/next level. 
+  - The level the node is on. 
+- Phantom Nodes
+  - Nodes used as a starting and/or ending marker. Not necessary in most data structures.
+  - A negative infinity starting node is necessary at each level, a positive infinity ending node is optional at each level. 
+- Operations:
+  1. Searching
+     1. Start at the top left phantom node
+     2. Check data in right node
+        - toSearch < data: toSearch doesn't exist on current level, move down one level. 
+        - toSearch > data: go to the right node
+        - toSearch = data: data found
+     3. Repeat until data is found or go off the list (data not found). 
+  2. Adding
+     1. Used the coin flipper to determine the highest level the data will be on. Data is added to the highest level and every level below the highest level. 
+        - ie. 3 heads were flipped before the first tail, the highest level to add data is 3. 
+     2. Create as many new levels as needed if the max level is higher than the current amount of levels. 
+     3. Traverse the skip list same as search, but add the item to the current level if need to. 
+     4. Repeat until reach the bottom level
+     - Note that handling duplicate items is implementation defined. 
+  3. Removing 
+     1. Traverse the skip list same as search, but at each level, disconnect the node from the rest of the nodes on that level and remove any empty levels. 
+     2. Repeat until reach the bottom of the list. 
+- Performance:
+  - Best Case: All operations are O(logn)
+  - Amoretized: All operations are O(logn)
+  - Worst Case: All operations are O(n) --> All items on the same list
+  - Space Complexity in the worst case is O(nlogn) but amoretized is O(n). 
+   
 ## XIII. Comparable & Comparator
 ### Comparable
 - a native Java interface that uses compareTo() to allow two objects to be compared. 
