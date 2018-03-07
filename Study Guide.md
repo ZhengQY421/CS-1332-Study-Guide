@@ -391,3 +391,11 @@ public class Main {
 ## XIV. Misc. 
 -	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. 
 -	Amortized means **average** case, **NOT** worst case. 
+
+## XV. Operations Table
+Data Structure |Search |Add   |Remove |Space Complexity 
+--- | --- | --- | --- | ---
+Array List  | O(n)  | O(n)  | O(n)  | O(n)
+BST | O(logn) to O(n) | O(logn) to O(n) | O(logn) to O(n) |O(n)
+AVL | O(logn) | O(logn) | O(logn) | O(n)
+2-4 | O(logn) | O(logn) | O(logn) | O(n)
