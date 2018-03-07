@@ -164,7 +164,7 @@
   - Second item < Third Child < Third item 
   - Third item < Fourth Child
 - Example:
-  ![24Ex](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/Screen%20Shot%202018-03-06%20at%2000.18.07.png)
+  ![24Ex](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/Screen%20Shot%202018-03-06%20at%2000.18.07.png?raw=true)
 - Properties:
   - Depth of all leaf nodes are the same
   - If there are n data items in a node, there are either 0 or n+1 children
