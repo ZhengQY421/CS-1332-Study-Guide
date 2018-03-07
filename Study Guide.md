@@ -197,8 +197,8 @@
         2. If the current node is empty and has child nodes, then move the predecessor/successor into the node. If predecessor/successor is now empty, continue fixing depending on circumstances:
            1. If any of the empty node's sibling have more than one data, then rotate that data to fill the empty node (similar to AVL).
            2. If all of the empty node's siblings have only one data, then bring down a reasonable data item from parent and merge with left/riight sibling. Repeat one the two options if this results in an empty/invalid parent node. 
-     - [Operation Examples](docs/B-Trees%20Examples.pdf)
-## X. Heaps
+     - [Operation Examples](S-1332-Study-Guide/B-Trees%20Examples.pdf)
+## X. HeapsC
 - Heaps are used when there is a need to keep a set of items in ascending/descending order but want to avoid O(n) worst case operation performance as that of a traditional list. 
 - Commonly represented as a binary tree and called a maxheap/minheap, where the root is the largest/smallest item. Can also be represented as an array. 
 ### Properties
