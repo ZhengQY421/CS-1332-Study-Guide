@@ -357,6 +357,58 @@
   3. Swap that item with the first element. 
   4. Repeat but excluding the sorted items. 
   
+### Divide and Conquer Sorts
+- Recursive. 
+- Advantage in that portions of the sorting algorithms can be done in parallel (multiple threads). 
+
+### Merge Sort
+- Divide and Conquer
+- **Not** in place, but Stable
+- Performance:
+  - Worst case is O(nlogn)
+  - Best case O(nlogn)
+- Steps:
+  1. Divide the array into 2 equal parts, one part containing the left half and the other the right half. 
+  2. Cotinue dividing the previously divided parts until each part only has one element. Now each part is sorted
+  3. Merge the two parts together, starting from the part of the only one element. 
+     - Have two markers of the elements to add back into the merged array for both parts. 
+     1. Take the smaller of the two parts and add that that to the merged array. 
+     2. Move the marker to the next element.
+     3. Repeat until all elements in both parts have been added to the merged array. 
+     - Note if all elements of one part has been added, no comparisons need to be made and the other part can just be added.
+  4. Repeat for the larger divided parts.
+  
+### Quick Sort
+- Divide and Conquer
+- In-place but **not** Stable
+- Performance:
+  - Best case is O(nlogn)
+  - Worst case is O(n^2)
+- Steps:
+  1. Choose an element at random to be the pivot
+  2. Swap the pivot with the first item
+  3. Set a left marker that starts with the second element, and a right marker that starts at the last item. 
+  4. Move the left marker to the right as long as it is smaller than the pivot and doesn't cross the right marker.
+  5. Move the right marker to the left as long as it is bigger than the pivot and doesn't cross the left marker. 
+  6. If left and right didn't cross yet after the move, swap the two and move each one left/right by one element. 
+  7. The right marker should now be to the left of the left marker. 
+  8. Swap the pivot with the right marker, which is the correct position the pivot should be at in the sorted array. 
+  9. Perform quick sort to the elements to the left and right of the pivot. Repeat until array is sorted. 
+  
+### LSD Radix Sort
+- For integers/numbers only 
+- **Not** in-place, but Stable
+- Runs a fixed number of iterations each time, depending on the length of the longest number. For example, 1000 would yield 4 iterations.
+- Performance: 
+  - Depends on the number of items in the array (n) and the length of the longest number (k)
+  - All cases are O(kn)
+- Steps:
+  - Create 19 buckets, and each bucket is a queue. Buckets 0 - 8 repesent negative digits -9 to -1, buckets 9 is the 0 digit, and buckets 10 - 18 are positive digits 1 to 9. 
+  1. For each iteration, take the least significant digit of each number (beginning with the ones digit). For example, 5 is the LSD of 45 in the first iteration. 
+  2. Use that digit to calculate the appropriate index. 
+  3. Add the number reperesented by that digit to the bucket at that index. 
+  4. After all numbers have been added, remove all numbers one at a time starting from bucket 0 and add each number to the array starting at index 0. 
+  5. Repeat for the rest of the iterations. At each iteration, the LSD is the next most significant digit (the tenth digit after the iteration of the ones digit). 
    
 ## XIV. Comparable & Comparator
 ### Comparable
