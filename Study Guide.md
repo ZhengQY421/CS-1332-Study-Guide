@@ -308,8 +308,57 @@
   - Amoretized: All operations are O(logn)
   - Worst Case: All operations are O(n) --> All items on the same list
   - Space Complexity in the worst case is O(nlogn) but amoretized is O(n). 
+  
+## XIII. Sorting
+- **In-Place Sort** is a sorting algorithm that doesn't copy over elements into another array/list, so a fixed amount of space is used. 
+- **Stable Sort**  is a sort in which the order of duplicate items is preserved. For example, if the unsorted list has two instances of "Pikachu," then in the sortefd list, the first "Pikachu" will come before the second "Pikachu."
+
+### Bubble Sort
+- Starting at the beginning of the array each time, swap an element with its next element if out of order. Then move on to the next elment. Continue to do so until the end of the array is reached. The biggest element of the iteration is now at the end of the array. Repeat but excluding previous sorted items. The most recent sorted item is always treated as the "end of the array" of an iteration. 
+- Performance: 
+  - Best case is O(n)
+  - Worst case is O(n^2)
+  - Average case is O(n^2)
+- In-place and Stable.
+- Steps: 
+  1. Compare items 1 & 2, if they are not in order, swap them. 
+  2. Proceed items 2 & 3, if they are not in order, swap them. 
+  3. Repeat until the end of the array, which is one iteration. The last item is in its correct position. 
+  4. Repeat steps 1-3 but excluding the last sorted item and with the next two items. Continue until the array is sorted. Note that if no swaps were made during an iteration, the array is sorted.
+  
+### Cocktail Shaker Sort
+- A variation of Bubble Sort. What is different is that for each iteration, the direction of traversal and the type of element to sort alternates. In the first iteration, the array is traversed from *left to right* and the at the end, the largest element of that iteration is sorted to the end of the array. In the second iteration, the array is traversed from *right to left*, beginning at the element before the sorted element from that last iteration, and at the end, the smallest element of the iteration is at the beginning of the array. Everything else is same as Bubble Sort. 
+- Performance:
+  - Best case is O(n)
+  - Worst case is O(n^2)
+  - Average case is O(n^2)
+  
+### Insertion Sort
+- The array will have a sorted and unsorted portion. In each iteration, an element from the unsorted portion is taken and swapped with elements in the sorted portion until it's postioned correctly in the sorted portion. 
+- Insertion sort always has a fixed number of iterations. 
+- In-place and Stable.
+- Performance:
+  - Best case is O(n)
+  - Worst case is O(n^2)
+  - Average case is O(n^2)
+- Steps:
+  1. Assume the first item is sorted.
+  2. With the next item, compare it with the previous item and swap until it's in the correct position (item before is samller). 
+  3. Repeat step 2 until the entire array is traversed. 
+  
+### Selection Sort
+- In each iteration, search the array for the smallest item and swap it with the element at the beginning of the array. Repeat until the array is sorted. The beginning of the array is always treated as the next element of the last sorted element. 
+- In-place, **not** Stable. 
+- Performance:
+  - All cases is O(n^2)
+- Steps:
+  1. Mark the first element as the smallest item.
+  2. Traverse the array to find the smallest item and mark it.
+  3. Swap that item with the first element. 
+  4. Repeat but excluding the sorted items. 
+  
    
-## XIII. Comparable & Comparator
+## XIV. Comparable & Comparator
 ### Comparable
 - a native Java interface that uses compareTo() to allow two objects to be compared. 
   1. Contains only the compareTo(Object o) method
@@ -389,11 +438,11 @@ public class Main {
     }
 }      
 ```
-## XIV. Misc. 
+## XV. Misc. 
 -	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. 
 -	Amortized means **average** case, **NOT** worst case. 
 
-## XV. Operations Table
+## XVI. Operations Table
 Data Structure |Search |Add   |Remove |Space Complexity 
 --- | --- | --- | --- | ---
 Array List  | O(n)  | O(n)  | O(n)  | O(n)
