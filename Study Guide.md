@@ -394,6 +394,21 @@
   7. The right marker should now be to the left of the left marker. 
   8. Swap the pivot with the right marker, which is the correct position the pivot should be at in the sorted array. 
   9. Perform quick sort to the elements to the left and right of the pivot. Repeat until array is sorted. 
+
+### Quick Select
+- **Not** a sort. 
+- Finds the kth smallest element in an array. 
+  - For example, in [5,3,2,1,4], the k = 4 th smallest element is 4. 
+- After quick select is performed on an array, everything less than the kth element is on its left side, while everything larger than the kth element is on its right side. Note that the left and right section will not be sorted. 
+- Performance:
+  - Best case is O(n)
+  - Worst case is O(n^2)
+- Steps:
+  1. Choose an element at random to be the pivot
+  2. Perform quick sort steps 2-8 
+  3. Check if the index of the pivot is the k
+  4a. If not, and k is less than pivot index, perform quickSelect again on the section to left of pivot and vice-versa. 
+  4b. If so, the kth element is found, and the quickSelect is now complete. 
   
 ### LSD Radix Sort
 - For integers/numbers only 
