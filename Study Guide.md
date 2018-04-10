@@ -496,7 +496,7 @@
          2. Align index failureTable[j-1] of p with the mismatched character in t.
          3. Continue the comparison from index failureTable[j-1] of p. 
   4. Once a match is found, align index failureTable[m-1] of p with the letter after the last letter in t of the preivous match.
-     - Example: [MoreKMP](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/MoreKMP.png?raw=true)
+     - Example: ![MoreKMP](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/MoreKMP.png?raw=true)
   5. Repeat step 3 except begin comparison at the letter at index failureTable[m-1] of p to find more matches. If any character of p exceeds the last character of t, the search is over. 
 - Performance:
   - Searching for the first match 
