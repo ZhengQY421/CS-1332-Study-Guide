@@ -424,8 +424,35 @@
   3. Add the number reperesented by that digit to the bucket at that index. 
   4. After all numbers have been added, remove all numbers one at a time starting from bucket 0 and add each number to the array starting at index 0. 
   5. Repeat for the rest of the iterations. At each iteration, the LSD is the next most significant digit (the tenth digit after the iteration of the ones digit). 
-   
-## XIV. Comparable & Comparator
+  
+## XIV. String Pattern Searching Algorithms
+- Note that the text being searched from is denoted *t*, with a length of *n*. The text to search fro is denoted *p*, with a length of *m*
+- Efficiecny is evaluated at the number of comparisons each algorithm makes. 
+### Brute Force
+- Steps
+  1. Align p at the beginning of t
+  2. Compare first character of p & t
+  3a. If matches, compare the next character. 
+  3b. If doesn't match, shift p to the right by one character of t and restart the comparison. 
+  4. Once a match is found, align p with the next character of t (shift p to the right by one), and repeat to find more matches. If any character of p exceeds the last character of t, the search is over. 
+- Performance:
+  - Searching for the first match 
+    - Best Case: O(m) 
+    - Other Cases: O(mn)
+  - Searching for all matches 
+    - All cases: O(mn)
+    
+### Boyer-Moore
+- Utilizes a last table to determine how much to shift p by upon mismatches. 
+- The algorithm begins by aligning the last charcter of p with the last charcter of t. 
+- **Last Table**
+  - A mapping from each character of the pattern to the last index index it appears in the pattern. 
+  - All other characters not in the pattern is mapped to -1. 
+  - Example: the last table of "dog"
+  ![lt](docs/ltEx.png)
+  
+   
+## XV. Comparable & Comparator
 ### Comparable
 - a native Java interface that uses compareTo() to allow two objects to be compared. 
   1. Contains only the compareTo(Object o) method
@@ -505,11 +532,11 @@ public class Main {
     }
 }      
 ```
-## XV. Misc. 
+## XVI. Misc. 
 -	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. 
 -	Amortized means **average** case, **NOT** worst case. 
 
-## XVI. Operations Table
+## XVII. Operations Table
 Data Structure |Search |Add   |Remove |Space Complexity 
 --- | --- | --- | --- | ---
 Array List  | O(n)  | O(n)  | O(n)  | O(n)
