@@ -429,6 +429,7 @@
 - Note that the text being searched from is denoted *t*, with a length of *n*. The text to search fro is denoted *p*, with a length of *m*
 - Efficiecny is evaluated at the number of comparisons each algorithm makes. 
 ### Brute Force
+- Most inefficient and simple
 - Steps
   1. Align p at the beginning of t
   2. Compare first character of p & t
@@ -444,12 +445,67 @@
     
 ### Boyer-Moore
 - Utilizes a last table to determine how much to shift p by upon mismatches. 
-- The algorithm begins by aligning the last charcter of p with the last charcter of t. 
+- The algorithm begins by comparing the last character of p.
 - **Last Table**
   - A mapping from each character of the pattern to the last index index it appears in the pattern. 
   - All other characters not in the pattern is mapped to -1. 
   - Example: the last table of "dog"
-  ![lt](docs/ltEx.png)
+  ![lt](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/ltEx.png?raw=true)
+- Steps:
+  1. Construct the last table using p.
+  2. Align p with the beginning of t. 
+  3. Compare the last charcter of p with its corresponding character in t. 
+     - If matches, move to the previous character and continue comparision
+     - If doesn't match:
+       1. Take the character in **t** and find its index in the last table, called i.
+       2. Aligh p so the character at i aligns with the mismatched character in t. 
+          - If this causes p to be shifted towards the left, insteaf of applying this shift, shift p to the right by one character.
+          - If i is -1, then shift p to the right by m, so the first character of p aligns with the character after the character aligned with the last character in p before the shift
+       3. Restart step 3
+  4. Once a match is found, shift p to the right by one character, and repeat step 3 to find more matches. If any character of p exceeds the last character of t, the search is over. 
+- Performance:
+  - Searching for the first match 
+    - Best Case: O(m) 
+    - Worst Case: O(mn)
+    - Average Case: O(m + n)
+  - Searching for all matches 
+    - Best & Average Case: O(m + n)
+    - Worst Case: O(mn)
+    
+### Knuth-Morris-Pratt (KMP)
+- Utilizes a failure table to determine how much to shift p by upon mismatches. 
+- **Failure Table**
+  - a table of length m
+  - Each entry represents a number representing the length of the longest suffix that's also a prefix up to that index. 
+  - Sounds complicated, but the way to construct this table in code is simple:
+    1. Creare two markers called i & j. i points to the frist character in p, while j points to the second character in p.
+    2. Set the first entry in the failure table to be 0
+    3. Compare characters pointed to by i & j
+       - If the same, failureTable[j] equals i+1. Then move i & j forward by one character. 
+       - If different, and i != 0, set i to failureTable[i-1]; j is unchanged. If i = 0, then failureTable[j] = 0, and move j forward by one character; i is unchanged. 
+    4. Repeat step 3 until j reaches m. 
+- Steps:
+  1. Construct a failure table using p.
+  2. Align p with the beginning of t
+  3. Compare first character in p with t
+     - If matches, move to the next character in p and t and continue comparison.
+     - If doesn't match:
+       - Mismatch is at the first character of p: shift p to the right by one and restart step 3. 
+       - Mistmatch is not at the first character of p: 
+         1. Assume mismatch occurred at index j of p. 
+         2. Align index failureTable[j-1] of p with the mismatched character in t.
+         3. Continue the comparison from index failureTable[j-1] of p. 
+  4. Once a match is found, align index failureTable[m-1] of p with the letter after the last letter in t of the preivous match.
+     - Example: [MoreKMP](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/MoreKMP.png?raw=true)
+  5. Repeat step 3 except begin comparison at the letter at index failureTable[m-1] of p to find more matches. If any character of p exceeds the last character of t, the search is over. 
+- Performance:
+  - Searching for the first match 
+    - Best Case: O(m) 
+    - Average and Worst Case: O(m+n)
+  - Searching for all matches 
+    - All cases: O(m + n)
+    
+### Rabin-Karp: to be completed
   
    
 ## XV. Comparable & Comparator
