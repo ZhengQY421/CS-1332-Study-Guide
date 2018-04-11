@@ -592,7 +592,7 @@ public class Main {
 -	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. 
 -	Amortized means **average** case, **NOT** worst case. 
 
-## XVII. Operations Table
+## XVII. Performance Table
 Data Structure |Search |Add   |Remove |Space Complexity 
 --- | --- | --- | --- | ---
 Array List  | O(n)  | O(n)  | O(n)  | O(n)
@@ -602,3 +602,22 @@ AVL | O(logn) | O(logn) | O(logn) | O(n)
 Heap | N/A | O(1) to (Amoretized) O(logn) | O(logn) |O(n)
 Hash Map | O(1) to O(n)| O(1) to O(n)| O(1) to O(n)| O(n)
 Skip List | O(logn) to O(n) | O(logn) to O(n) | O(logn) to O(n) |O(n) to O(nlogn)
+
+Sorting Algorithm |Best Case |Average Case |Worst Case |Stable |In-Place
+--- | --- | --- | --- 
+Bubble Sort |O(n) |O(n^2) |O(n^2) |X |X
+Cocktail Shaker |O(n) |O(n^2) |O(n^2) |X |X
+Insertion Sort |O(n) |O(n^2) |O(n^2) |X |X
+Selection Sort |O(n^2) |O(n^2) |O(n^2) | |X
+Merge Sort |O(nlogn) |O(nlogn) |O(nlogn)|X |
+Quick Sort |O(nlogn) |O(nlogn) |O(n^2) | |X
+Quick Select |O(n) |O(n) |O(n^2)
+Radix Sort |O(kn) |O(kn) |O(kn) |X | 
+
+String Pattern Searching Algorithm|Best Case |Average Case |Worst Case
+--- | --- | --- | --- 
+Brute Force |First: O(m) All: O(mn) |First: O(mn) All: O(mn) |First: O(mn) All: O(mn)
+Boyer-Moore |First: O(m) All: O(m+n) |First: O(m+n) All: O(m+n) |First: O(mn) All: O(mn)
+KMP |First: O(m) All: O(m+n) |First: O(m+n) All: O(m+n) |First: O(m+n) All: O(m+n)
+
+
