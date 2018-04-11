@@ -604,7 +604,7 @@ Hash Map | O(1) to O(n)| O(1) to O(n)| O(1) to O(n)| O(n)
 Skip List | O(logn) to O(n) | O(logn) to O(n) | O(logn) to O(n) |O(n) to O(nlogn)
 
 Sorting Algorithm |Best Case |Average Case |Worst Case |Stable |In-Place
---- | --- | --- | --- 
+--- | --- | --- | --- | --- | --- 
 Bubble Sort |O(n) |O(n^2) |O(n^2) |X |X
 Cocktail Shaker |O(n) |O(n^2) |O(n^2) |X |X
 Insertion Sort |O(n) |O(n^2) |O(n^2) |X |X
