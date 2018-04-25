@@ -507,7 +507,6 @@
     
 ### Rabin-Karp: to be completed
   
-   
 ## XV. Comparable & Comparator
 ### Comparable
 - a native Java interface that uses compareTo() to allow two objects to be compared. 
@@ -588,9 +587,54 @@ public class Main {
     }
 }      
 ```
-## XVI. Misc. 
+## XVI. Dynamic Programming
+- An algorithm paradigm that solves a complex problem by breaking it down into a collection of simpler recurrent subproblems. Does not mean that we have to use recursion. 
+- Bottom-Up Approach:
+  1. Identify smaller/simpler subproblems
+  2. Order of solving subproblems
+  3. Solve subproblems before larger problem. 
+
+## XVII. Graphs 
+- A graph is a set of nodes/vertices and a collection edges that connect each pair of vertices. 
+- **Order**: Number of vertices. 
+- **Size**: Number of edges. 
+- **Degree**: Number of edges incident to a vertex. If all degrees equal, then the graph has that degree. 
+- **Path**: A set of edges connecting two nodes. A simple path has no repeated verticies. 
+### Clarification: 
+- Graphs can have unconnected verticies
+- Graphs can be directed, where all the edges flow in one direction 
+- Graphs can be undirected, where all the edges flow in both directions. 
+- Graphs can be weighted, where there are weight/cost associated with each edge. 
+- A directed edge is an ordered pair of vertices (u,v), where u is the origin and v is the destination. 
+- An undirected edge is an unordered pair of verticies (u,v). 
+- A self-loop is an edge that connects a vertex to itself. 
+- Two edges are parallel if they connect the same pair of vertices. 
+- Two connected vertices are adjacent to one another and the edge is incident on both verticies. 
+- A cycle is a path whose first and last vertices are the same. Simple cycle is a cycle of simple path. 
+- The length of a path or a cycle is its number of edges. 
+### Search Algorithm:
+#### Depth First Search (Stack-based)
+- Keep tracks of visited vertex.
+- Recursive - each iteration is stored on the system stack. The iteration is popped once it is finished. 
+- Starting from a vertex, for each of its unvisited neighbor, visit it and store it as visited. 
+#### Breadth First Search (Queue-based) 
+- Keep tracks of visited vertex. 
+- Stores all the vetices to visit into a queue. 
+- Starting from a vertex, visit it and add all of its neighbors to the to visit queue. Contintue the visit until to visit is empty. 
+### Dijkstra's Shortest Path Algorithm:
+- Finds the shorted path for weighted directional graphs from a starting to vertex to all other vertices. 
+- Uses BFS to move forward. 
+- Stores the distance in a map where each key is each vertex and points to the shortest path's weight. 
+- Keeps track of visited vertices. 
+#### Steps:
+1. In the map to return, point each vertex (key) to a value of infinity distance.
+2. Starting from a vertex, visit it and mark it visited. 
+3. For each of the vertex's unvisitef neighbor s, add the neighbor to the toVisit list and check in the map if the current weight is greater than the sum of the weight to reach the vertex and the weight of the edge connecting to the neighbor. If so, update with the lesser weight. 
+4. Repeat 2 and 3 until all vertices have been visited or there are no more vertices to visit. 
+
+## XVIII. Misc. 
 -	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. 
--	Amortized means **average** case, **NOT** worst case. 
+-	Amortized means time complexity over many consecutive iterations. For example resizing array when adding to Array List.   
 
 ## XVII. Performance Table
 Data Structure |Search |Add   |Remove |Space Complexity 
