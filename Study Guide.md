@@ -1,4 +1,5 @@
 # CS 1332 Study Guide
+Author: Oliver Zheng
 ## I. ArrayList
 * ArrayList is typically used to store Objects (primitives as Wrapper Objects). Arrays are used to store primitives and objects. 
 * Dynamically resizes when adding to a full ArrayList. Java's built-in ArrayList resizes the array backing structure to 1.5 of its original size. 
@@ -504,8 +505,6 @@
     - Average and Worst Case: O(m+n)
   - Searching for all matches 
     - All cases: O(m + n)
-    
-### Rabin-Karp: to be completed
   
 ## XV. Comparable & Comparator
 ### Comparable
@@ -593,6 +592,34 @@ public class Main {
   1. Identify smaller/simpler subproblems
   2. Order of solving subproblems
   3. Solve subproblems before larger problem. 
+### Longest Common Subsequence (LCS) Algorithm
+- Find the longest common subsequence of two strings, A and B. 
+- A subsequence is defined as a set of characters that is contained in both strings in the same order
+  - Ex. LCS for ABCDE and AFUCE is ACE 
+- Utilizes dynamic programming and a 2-D array, denoted L. 
+  - L's row length is equal to the length of A, and its column length is equal to the length of B. 
+- Have markers x and y track the index of each character in A and B, respectively. 
+#### Steps:
+1. Fill the first row and column of L with 0's 
+2. Compare A[x] and B[y], if they
+   - equal: fill L[x+1][y+1] with L[x][y]+1
+   - do not equal: fill L[x+1][y+1] with Max(L[x][y+1], L[x+1][y])
+3. Increment x by 1.
+4. Repeat Steps 2 until x reaches the end 
+5. Increment y by 1, Set x to 0. 
+6. Repeat Steps 2-5 until y reaches the end
+7. The value at L[A.length()][B.length()] is the length of LCS
+- Note that HB's slides allow -1 as an index for L, so for L, all the x+1 and y+1 above would be replaced with x and y, while the x and y would be replaced with x-1 and y-1, respectively. 
+#### Finding the LCS
+1. Set x and y to A.length() and B.length(), reespectively. 
+2. Have an array, denoted LCS, that reperesents each character of the LCS with each index. Have i represnet the index of LCS and set that to L[x][y]
+3. Compare A[x-1] and B[x-1]
+   1. if they equal, LCS[i-1] = A[x-1]. i--, x--, y--. 
+   2. if they do not equal, comapre L[x-1][y] and L[x][y-1], 
+      - if the first is bigger, x--.
+      - if the second is bigger, y--. 
+4. Repeat steps 3 until x or y reaches 0. 
+5. LCS array should now represent the LCS. 
 
 ## XVII. Graphs 
 - A graph is a set of nodes/vertices and a collection edges that connect each pair of vertices. 
@@ -631,8 +658,44 @@ public class Main {
 2. Starting from a vertex, visit it and mark it visited. 
 3. For each of the vertex's unvisitef neighbor s, add the neighbor to the toVisit list and check in the map if the current weight is greater than the sum of the weight to reach the vertex and the weight of the edge connecting to the neighbor. If so, update with the lesser weight. 
 4. Repeat 2 and 3 until all vertices have been visited or there are no more vertices to visit. 
+### Minimum Spanning Tree (MST)
+- A set of edges that connects all vertices in a graph with the minimum total weight.
+- Edges must not form cycles. 
+- Only for weighted graphs.
+- An MST has |V|-1 edges. 
+### Prim's Algorithm for finding MST
+- Starting from a vertex, find the minimum spanning tree by adding each of the smallest neighbor and repeating the process with the neighbor.  
+- Utilizes a priority queue to find the smallest edge each iteration.
+#### Steps
+1. Start from a vertex, mark it as visited and add all of its neighboring edges to the priority queue, denoted toVisit. 
+2. Remove an edge from toVisit, and check if the destination vertex has been visited. 
+3. If not, mark it as visited and add the edge to the MST set. 
+4. Add all of the destination vertex's neighboring edges to toVisit. 
+5. Repeat steps 2-4 until all vertices have been visited or toVisit is empty. 
+6. The MST set should represent the MST. If not, the MST is invalid and cannot exist. 
+### Kruskal's Algorithm for finding MST
+- Utilizes Greedy Algorithm.
+- Adds all edges to a priority queue, and remove the smallest edge every iteration until a valid MST is formed. 
+- Utilizes a DisjointSet to ensure there are no cycles in MST.
+#### Disjoint Set
+- Consists of DisjointNodes, where each node has a parent. The parent's parent is itself. 
+- Each element/vertex can only be in one Disjoint Set.
+- An element can be in a Disjoint Set of itself, acting as the parent. 
+- Two important methods:
+  1. Find(T data)
+     - Finds the parent/root of the Disjoint Set containing the data
+  2. Union(DisjointNode one, DisjointNode two)
+     - Combines the Disjoint Sets containing each node
+#### Steps
+- Add all the edges to a Priority Queue, denoted toVisit. 
+- Creates a Disjoint Set of all Vertices, where each vertex is a DisjointSet of itself. 
+1. Remove an edge from toVisit
+2. Check if it has been visited and check (find) if the two vertices of the edge are within the same Disjoint Set. 
+3. If not, add the edge to the MST set and combine (union) the two Disjoint Sets containing each vertex. 
+4. Repeat steps 1-3 until all vertices have been visited or there are no more edges toVisit. 
+5. The MST set should represent the MST. If not, the MST is invalid and cannot exist. 
 
-## XVIII. Misc. 
+## XVIII. Misc
 -	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. 
 -	Amortized means time complexity over many consecutive iterations. For example resizing array when adding to Array List.   
 
@@ -651,17 +714,28 @@ Sorting Algorithm |Best Case |Average Case |Worst Case |Stable |In-Place
 --- | --- | --- | --- | --- | --- 
 Bubble Sort |O(n) |O(n^2) |O(n^2) |X |X
 Cocktail Shaker |O(n) |O(n^2) |O(n^2) |X |X
-Insertion Sort |O(n) |O(n^2) |O(n^2) |X |X
-Selection Sort |O(n^2) |O(n^2) |O(n^2) | |X
-Merge Sort |O(nlogn) |O(nlogn) |O(nlogn)|X | 
+Insertion Sort |O(n) |O(n^2) |O(n^2) |X |X 
+Selection Sort |O(n^2) |O(n^2) |O(n^2) | |X 
+Merge Sort |O(nlogn) |O(nlogn) |O(nlogn)|X |
 Quick Sort |O(nlogn) |O(nlogn) |O(n^2) | |X
 Quick Select |O(n) |O(n) |O(n^2) |  |
-Radix Sort |O(kn) |O(kn) |O(kn) |X |  
+Radix Sort |O(kn) |O(kn) |O(kn) |X | 
 
 String Pattern Searching Algorithm|Best Case |Average Case |Worst Case
 --- | --- | --- | --- 
 Brute Force |First: O(m) <br>All: O(mn) |First: O(mn) <br>All: O(mn) |First: O(mn) <br>All: O(mn)
 Boyer-Moore |First: O(m) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n) |First: O(mn) <br>All: O(mn)
-KMP |First: O(m) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n)
+KMP |First: O(m) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n) |First: |O(m+n) <br>All: O(m+n)
+LCS |O(nm) |O(nm) |O(nm)
+
+*V stands for number of vertices and E stands for number of edges*
+
+Graph Algorithms| Time Complexity
+--- | ---
+BFS | O(V+E)
+DFS | O(V+E)
+Dijkstra | O((V+E)log(V))
+Prims | O((V+E)log(V))
+Kruskal | O((V+E)log(V))
 
 
