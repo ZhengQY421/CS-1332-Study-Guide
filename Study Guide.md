@@ -164,8 +164,6 @@ Author: Oliver Zheng
   - First item < Second child < Second item
   - Second item < Third Child < Third item 
   - Third item < Fourth Child
-- Example:
-  ![24Ex](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/Screen%20Shot%202018-03-06%20at%2000.18.07.png?raw=true)
 - Properties:
   - Depth of all leaf nodes are the same
   - If there are n data items in a node, there are either 0 or n+1 children
@@ -198,7 +196,7 @@ Author: Oliver Zheng
         2. If the current node is empty and has child nodes, then move the predecessor/successor into the node. If predecessor/successor is now empty, continue fixing depending on circumstances:
            1. If any of the empty node's sibling have more than one data, then rotate that data to fill the empty node (similar to AVL).
            2. If all of the empty node's siblings have only one data, then bring down a reasonable data item from parent and merge with left/riight sibling. Repeat one the two options if this results in an empty/invalid parent node. 
-     - [Operation Examples](CS-1332-Study-Guide/B-Trees%20Examples.pdf)
+     - [Operation Examples](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/B-Trees%20Examples.pdf)
 ## X. Heaps
 - Heaps are used when there is a need to keep a set of items in ascending/descending order but want to avoid O(n) worst case operation performance as that of a traditional list. 
 - Commonly represented as a binary tree and called a maxheap/minheap, where the root is the largest/smallest item. Can also be represented as an array. 
@@ -235,7 +233,7 @@ Author: Oliver Zheng
         heapify(index)
   ```
 - O(n) performance 
-- [Example](docs/BuildHeapExample.pdf)
+- [Example](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/BuildHeapExample.pdf)
 ### Priority Queue
 - A data structure that, depending on implementation, return the items in ascending/descending order. 
 - Used for printer jobs, CPU schedulers, etc. 
