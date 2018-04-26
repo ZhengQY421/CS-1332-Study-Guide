@@ -725,7 +725,7 @@ String Pattern Searching Algorithm|Best Case |Average Case |Worst Case
 --- | --- | --- | --- 
 Brute Force |First: O(m) <br>All: O(mn) |First: O(mn) <br>All: O(mn) |First: O(mn) <br>All: O(mn)
 Boyer-Moore |First: O(m) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n) |First: O(mn) <br>All: O(mn)
-KMP |First: O(m) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n) |First: |O(m+n) <br>All: O(m+n)
+KMP |First: O(m) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n) |First: O(m+n) <br>All: O(m+n)
 LCS |O(nm) |O(nm) |O(nm)
 
 *V stands for number of vertices and E stands for number of edges*
