@@ -640,11 +640,11 @@ public class Main {
 5. Increment y by 1, Set x to 0.
 6. Repeat Steps 2-5 until y reaches the end
 7. The value at L[A.length()][B.length()] is the length of LCS
-- Note that HB's slides allow -1 as an index for L, so for L, all the x+1 and y+1 above would be replaced with x and y, while the x and y would be replaced with x-1 and y-1, respectively.
+- Note that HB's slides allow -1 as an index for L, so for L, all the x+1 and y+1 above would be replaced with x and y, while the x and y would be replaced with x-1 and y-1, respectively. I just personally think the above method is easier to visualize; they are the same by nature.
 #### Finding the LCS
 1. Set x and y to A.length() and B.length(), reespectively.
-2. Have an array, denoted LCS, that reperesents each character of the LCS with each index. Have i represnet the index of LCS and set that to L[x][y]
-3. Compare A[x-1] and B[x-1]
+2. Have an array, denoted LCS, that reperesents each character of the LCS with each index. Have i represent the index of LCS and set that to L[x][y]
+3. Compare A[x-1] and B[y-1]
    1. if they equal, LCS[i-1] = A[x-1]. i--, x--, y--.
    2. if they do not equal, comapre L[x-1][y] and L[x][y-1],
       - if the first is bigger, x--.
@@ -676,10 +676,12 @@ public class Main {
 - Keep tracks of visited vertex.
 - Recursive - each iteration is stored on the system stack. The iteration is popped once it is finished.
 - Starting from a vertex, for each of its unvisited neighbor, visit it and store it as visited.
+- The search terminates when all vertices have been visited.
 #### Breadth First Search (Queue-based)
 - Keep tracks of visited vertex.
 - Stores all the vetices to visit into a queue.
 - Starting from a vertex, visit it and add all of its neighbors to the to visit queue. Contintue the visit until to visit is empty.
+- The search terminates when all vertices have been visited.
 ### Dijkstra's Shortest Path Algorithm:
 - Finds the shorted path for weighted directional graphs from a starting to vertex to all other vertices.
 - Uses BFS to move forward.
@@ -688,7 +690,7 @@ public class Main {
 #### Steps:
 1. In the map to return, point each vertex (key) to a value of infinity distance.
 2. Starting from a vertex, visit it and mark it visited.
-3. For each of the vertex's unvisitef neighbor s, add the neighbor to the toVisit list and check in the map if the current weight is greater than the sum of the weight to reach the vertex and the weight of the edge connecting to the neighbor. If so, update with the lesser weight.
+3. For each of the vertex's unvisited neighbor, add the neighbor to the toVisit list and check in the map if the current weight is greater than the sum of the weight to reach the vertex and the weight of the edge connecting to the neighbor. If so, update with the smaller weight.
 4. Repeat 2 and 3 until all vertices have been visited or there are no more vertices to visit.
 ### Minimum Spanning Tree (MST)
 - A set of edges that connects all vertices in a graph with the minimum total weight.
@@ -738,7 +740,6 @@ public class Main {
 
 ## XVIII. Performance Table
 
-
 <br />
 <br />
 
@@ -779,6 +780,8 @@ DFS | O(V+E)
 Dijkstra| O((V+E)log(V))
 Prims | O((V+E)log(V))
 Kruskal | O((V+E)log(V))
+
+More available at http://bigocheatsheet.com/
 
 <br />
 <br />
