@@ -65,7 +65,7 @@
 ## V. Queues
 -	Insertion are at the rear of the queue and removals are at the front.
 -	**Main operations:** enqueue, dequeue. Other: isEmpty(), peek(), size().
-- Ways to implement a Stack: Array, LinkedList.
+- Ways to implement a Queue: Array, LinkedList.
 - Applications: WaitList, Multi-Threading
 -	Each operation is O(1) , takes up O(n) space.
 
@@ -84,6 +84,7 @@
 1. PreOrder: visit node first before descendants. Node - Left - Right
 2. PostOrder - visit descendant before node. Left-Right-Node
 3. LevelOrder - visit each node on each level in left to right fashion
+4. InOrder - visit the left child first, then the node, then the right child. Left-Node-Right.
 
 ### Binary Trees:
 - Has the following properties:
@@ -151,7 +152,7 @@
 - Searching operation remains the same.
 - Adding & Removing
   - After a node is added/removed, the heights and balance factor of the added/removed node are updated, and if necessary, rotations are done. Implemented recursively.
-  1. Balance factor (bf) - Calculated by subtracting the height of the left subtree by the height of the right subtree.
+  1. Balance factor (bf) = leftHeight - rightHeight = subtracting the height of the left subtree by the height of the right subtree.
      1. 0 = Perfect balance.
      2.	-1/1 = considered balance but slightly heavier on right/left side. No rotations can be done to make tree balanced.
      3.	Other values mean that subtree is unbalanced and at least one rotation needs to be done.
@@ -250,6 +251,7 @@
     Iterate index from size/2 to 1:
         heapify(index)
   ```
+- At each index, compare the current item with its children and if the order property is broken, continuously swap until it is not.
 - O(n) performance
 
 ### Priority Queue
@@ -283,7 +285,7 @@
   4. When removing, search the key and set that index to NULL.
       - This would break the search if the key was moved due to collision. To solve this, set a "deleted" marker that indicates something was once stored. However, this also means that adding becomes more complicated because the key to add may be a collided key may already exist elsewhere in the array. To solve this, if came across an index marked "deleted," save the index. Add to the saved index only if the key is not found in the hash map.
 - **Collision Handling #3** - Quadratic Probing
-  1. Same as linear probing but instead of checking i, i+1, i+2, i+3, you instead check i, i+12, i+22, i+32….
+  1. Same as linear probing but instead of checking i, i+1, i+2, i+3, you instead check i, i+1^2, i+2^2, i+3^2….
   2. Collisions are more spaced out and other key-value pairs may not be shifted too much from their ideal index.
   3. However, not all empty slots are checked and a key-value pair may not be added in. In such case, the backing array will need to be resized when you have probed n = array.length times.
 - **Collision Handling #4** - Double Hashing
@@ -318,7 +320,7 @@
      1. Used the coin flipper to determine the highest level the data will be on. Data is added to the highest level and every level below the highest level.
         - ie. 3 heads were flipped before the first tail, the highest level to add data is 3.
      2. Create as many new levels as needed if the max level is higher than the current amount of levels.
-     3. Traverse the skip list same as search, but add the item to the current level if need to.
+     3. Traverse the skip list same as search, but add the item to the current level if need to move down one level.
      4. Repeat until reach the bottom level
      - Note that handling duplicate items is implementation defined.
   3. Removing
@@ -350,6 +352,8 @@
 
 ### Cocktail Shaker Sort
 - A variation of Bubble Sort. What is different is that for each iteration, the direction of traversal and the type of element to sort alternates. In the first iteration, the array is traversed from *left to right* and the at the end, the largest element of that iteration is sorted to the end of the array. In the second iteration, the array is traversed from *right to left*, beginning at the element before the sorted element from that last iteration, and at the end, the smallest element of the iteration is at the beginning of the array. Everything else is same as Bubble Sort.
+- Over the long run, cocktail shaker sort has no performance advantage over bubble sort. However, it is more efficient only in a few cases.
+  - For example, a list of n items with everything sorted except for the smallest element, which is at the end of the list. Bubble sort would take n iterations of sorting, while cocktail sort would only take 1 iteration (both directions).
 - Performance:
   - Best case is O(n)
   - Worst case is O(n^2)
@@ -365,7 +369,7 @@
   - Average case is O(n^2)
 - Steps:
   1. Assume the first item is sorted.
-  2. With the next item, compare it with the previous item and swap until it's in the correct position (item before is samller).
+  2. With the next item, compare it with the previous item and swap until it's in the correct position (item before is smaller).
   3. Repeat step 2 until the entire array is traversed.
 
 ### Selection Sort
@@ -429,8 +433,8 @@
   1. Choose an element at random to be the pivot
   2. Perform quick sort steps 2-8
   3. Check if the index of the pivot is the k
-  4a. If not, and k is less than pivot index, perform quickSelect again on the section to left of pivot and vice-versa.
-  4b. If so, the kth element is found, and the quickSelect is now complete.
+     1. If not, and k is less than pivot index, perform quickSelect again on the section to left of pivot and vice-versa.
+     2. If so, the kth element is found, and the quickSelect is now complete.
 
 ### LSD Radix Sort
 - For integers/numbers only
@@ -449,16 +453,16 @@
 
 
 ## XIV. String Pattern Searching Algorithms
-- Note that the text being searched from is denoted *t*, with a length of *n*. The text to search fro is denoted *p*, with a length of *m*
+- Note that the text being searched from is denoted *t*, with a length of *n*. The text to search for is denoted *p*, with a length of *m*
 - Efficiecny is evaluated at the number of comparisons each algorithm makes.
 ### Brute Force
 - Most inefficient and simple
 - Steps
   1. Align p at the beginning of t
   2. Compare first character of p & t
-  3a. If matches, compare the next character.
-  3b. If doesn't match, shift p to the right by one character of t and restart the comparison.
-  4. Once a match is found, align p with the next character of t (shift p to the right by one), and repeat to find more matches. If any character of p exceeds the last character of t, the search is over.
+     1. If matches, compare the next character.
+     2. If doesn't match, shift p to the right by one character of t and restart the comparison.
+  3. Once a match is found, align p with the next character of t (shift p to the right by one), and repeat to find more matches. If any character of p exceeds the last character of t, the search is over.
 - Performance:
   - Searching for the first match
     - Best Case: O(m)
@@ -474,6 +478,7 @@
   - All other characters not in the pattern is mapped to -1.
   - Example: the last table of "dog"
   ![lt](https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/ltEx.png?raw=true)
+  <img src="https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/ltEx.png?raw=true" align="center" height="48" width="48">
 - Steps:
   1. Construct the last table using p.
   2. Align p with the beginning of t.
