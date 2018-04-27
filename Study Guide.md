@@ -477,7 +477,7 @@
   - A mapping from each character of the pattern to the last index index it appears in the pattern.
   - All other characters not in the pattern is mapped to -1.
   - Example: the last table of "dog"
-  <img src="https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/ltEx.png?raw=true" align="center" height="180" width="400">
+  <img src="https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/ltEx.png?raw=true" align="middle" height="180" width="400">
 - Steps:
   1. Construct the last table using p.
   2. Align p with the beginning of t.
