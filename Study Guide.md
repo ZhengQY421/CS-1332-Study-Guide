@@ -7,7 +7,7 @@
 * ArrayList is typically used to store Objects (primitives as Wrapper Objects). Arrays are used to store primitives and objects.
 * Dynamically resizes when adding to a full ArrayList. Java's built-in ArrayList resizes the array backing structure to 1.5 of its original size.
 * Accessing element is O(1).
-* Inserting/Searching/Removing is O(n) with the exception of the last element, which is O(1).
+* Inserting/Searching/Removing is O(n) with the exception of the last element, which is O(1), if there is access to the tail node. 
 
 ## II. Linked List
 * LinkedList can be understood as a chain of nodes, where each node has its own data and connection to the neighboring nodes.
