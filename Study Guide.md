@@ -753,16 +753,16 @@ Heap | N/A | O(1) to (Amoretized) O(logn) | O(logn) |O(n)
 Hash Map | O(1) to O(n)| O(1) to O(n)| O(1) to O(n)| O(n)
 Skip List | O(logn) to O(n) | O(logn) to O(n) | O(logn) to O(n) |O(n) to O(nlogn)
 
-Sorting Algorithm |Best Case |Average Case |Worst Case |Stable |In-Place
---- | --- | --- | --- | --- | ---
-Bubble Sort |O(n) |O(n^2) |O(n^2) |X |X
-Cocktail Shaker |O(n) |O(n^2) |O(n^2) |X |X
-Insertion Sort |O(n) |O(n^2) |O(n^2) |X |X
-Selection Sort |O(n^2) |O(n^2) |O(n^2) | |X
-Merge Sort |O(nlogn) |O(nlogn) |O(nlogn)|X |
-Quick Sort |O(nlogn) |O(nlogn) |O(n^2) | |X
-Quick Select |O(n) |O(n) |O(n^2) |  |
-Radix Sort |O(kn) |O(kn) |O(kn) |X |
+Sorting Algorithm |Best Case |Average Case |Worst Case |Stable |In-Place |Space Complexity
+--- | --- | --- | --- | --- | --- | ---
+Bubble Sort |O(n) |O(n^2) |O(n^2) |X |X |O(1)
+Cocktail Shaker |O(n) |O(n^2) |O(n^2) |X |X |O(1)
+Insertion Sort |O(n) |O(n^2) |O(n^2) |X |X |O(1)
+Selection Sort |O(n^2) |O(n^2) |O(n^2) | |X |O(1)
+Merge Sort |O(nlogn) |O(nlogn) |O(nlogn)|X | |O(n)
+Quick Sort |O(nlogn) |O(nlogn) |O(n^2) | |X |O(logn)
+Quick Select |O(n) |O(n) |O(n^2) |  | |O(logn)
+Radix Sort |O(kn) |O(kn) |O(kn) |X | |O(n+k)
 
 String Pattern Searching Algorithm|Best Case |Average Case |Worst Case
 --- | --- | --- | ---
