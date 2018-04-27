@@ -51,7 +51,7 @@
 
 ### Performance:
 - Most of the time same performance as the data structure.
--	A LinkedList iterator would have better performance since Linked List get() would be O(n^2) (n for getting item, repeated n2 times), while an iterator would be O(n) (1 for getting item, repeated n times).
+-	A LinkedList iterator would have better performance since Linked List get() all items would be O(n^2) (n for getting item, repeated n times), while an iterator would be O(n) (1 for getting item, repeated n times).
 
 
 ## IV. Stacks
