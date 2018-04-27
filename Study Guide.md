@@ -525,7 +525,7 @@
   4. Once a match is found, align index failureTable[m-1] of p with the letter after the last letter in t of the previous match.
 
 
-     <img src="https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/MoreKMP.png?raw=true" align="left" height="220" width="400">
+     <img src="https://github.com/ZhengQY421/CS-1332-Study-Guide/blob/master/MoreKMP.png?raw=true" align="middle" height="220" width="400">
   5. Repeat step 3 except begin comparison at the letter at index failureTable[m-1] of p to find more matches. If any character of p exceeds the last character of t, the search is over.
 - Performance:
   - Searching for the first match
