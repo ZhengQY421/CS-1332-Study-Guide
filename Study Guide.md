@@ -789,3 +789,6 @@ More available at http://bigocheatsheet.com/
 ## XIX. Misc
 -	An abstract data type (ADT) is an abstraction of a data structure. It specifies data stored, operations on data, and errors associated with operations. Not all data structure ADTs are included in this study guide, but you should know those by heart.
 -	Amortized means time complexity over many consecutive iterations. For example resizing array when adding to Array List.   
+
+
+This is a test
